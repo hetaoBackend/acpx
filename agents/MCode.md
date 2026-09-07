@@ -24,11 +24,12 @@ Choose the acpx permission policy that matches the task, for example
 
 ## Session lifecycle
 
-MCode currently implements `session/new` and `session/prompt`, but does not advertise
-provider-session reload. `acpx mcode sessions new` closes the ACP client after saving
-the local record, so a later CLI prompt starts with fresh MCode context instead of
-continuing that provider conversation. Do not treat sequential CLI invocations as a
-multi-turn session. Use `acpx mcode exec …` for predictable automation.
+Use `acpx mcode exec …` for independent one-shot prompts. Resuming a provider
+conversation across CLI invocations requires the installed MCode server to advertise
+ACP session reload; a saved acpx record alone does not provide that capability.
+Older MCode builds did not advertise reload, so do not infer ACP continuity from
+MCode's interactive session-management commands. See [Sessions](../docs/sessions.md)
+for acpx's persistence and queue-owner behavior.
 
 If `mcode` is installed outside `PATH`, override the built-in argv in
 `~/.acpx/config.json`:
